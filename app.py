@@ -2,7 +2,8 @@ import os
 from googleapiclient.discovery import build
 import streamlit as st
 
-API_KEY = st.secrets["YOUTUBE_API_KEY"]
+# ✅ Render ke Environment Variable se API key lene ke liye os.environ use karein
+API_KEY = os.environ.get("YOUTUBE_API_KEY")
 youtube = build("youtube", "v3", developerKey=API_KEY)
 
 def search_videos(query):
@@ -31,3 +32,4 @@ if st.button("Search"):
         for vid in videos:
             st.write(f"**{vid['title']}** by *{vid['channel']}*")
             st.write(f"https://youtu.be/{vid['videoId']}")
+
